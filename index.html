@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big O Complexity Visualizer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <nav aria-label="Primary navigation">
+      <a href="#hero">Big O Visualizer</a>
+      <ul>
+        <li><a href="#complexity-visualizer">Visualizer</a></li>
+        <li><a href="#complexity-explainer">Explainer</a></li>
+        <li><a href="#sorting-visualizer">Sorting</a></li>
+        <li><a href="#cheat-sheet">Cheat Sheet</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section id="hero" aria-labelledby="hero-heading">
+      <h1 id="hero-heading">Big O Complexity Visualizer</h1>
+      <p>Explore how algorithm performance changes as input size grows.</p>
+      <a href="#complexity-visualizer">Start Visualizing</a>
+    </section>
+
+    <section id="complexity-visualizer" aria-labelledby="complexity-visualizer-heading">
+      <h2 id="complexity-visualizer-heading">Complexity Visualizer</h2>
+      <p>Compare common time complexities on a shared growth chart.</p>
+
+      <form id="complexity-form" aria-label="Complexity chart controls">
+        <fieldset>
+          <legend>Select Complexities</legend>
+
+          <label>
+            <input type="checkbox" name="complexity" value="constant" checked>
+            O(1)
+          </label>
+
+          <label>
+            <input type="checkbox" name="complexity" value="logarithmic" checked>
+            O(log n)
+          </label>
+
+          <label>
+            <input type="checkbox" name="complexity" value="linear" checked>
+            O(n)
+          </label>
+
+          <label>
+            <input type="checkbox" name="complexity" value="linearithmic" checked>
+            O(n log n)
+          </label>
+
+          <label>
+            <input type="checkbox" name="complexity" value="quadratic" checked>
+            O(n^2)
+          </label>
+
+          <label>
+            <input type="checkbox" name="complexity" value="exponential">
+            O(2^n)
+          </label>
+        </fieldset>
+
+        <label for="input-size">Input Size: <output id="input-size-output" for="input-size">10</output></label>
+        <input type="range" id="input-size" name="input-size" min="1" max="50" value="10">
+
+        <button type="button" id="update-chart">Update Chart</button>
+      </form>
+
+      <figure>
+        <canvas id="complexity-chart" aria-label="Line chart comparing Big O complexity growth">
+          Your browser does not support canvas charts.
+        </canvas>
+        <figcaption>Growth comparison for selected Big O functions.</figcaption>
+      </figure>
+
+      <article aria-labelledby="calculation-heading">
+        <h3 id="calculation-heading">Current Calculations</h3>
+        <dl id="complexity-results" aria-live="polite"></dl>
+      </article>
+    </section>
+
+    <section id="complexity-explainer" aria-labelledby="complexity-explainer-heading">
+      <h2 id="complexity-explainer-heading">Complexity Explainer</h2>
+      <article>
+        <h3>What Big O Describes</h3>
+        <p>Big O notation describes how an algorithm scales as the amount of input data increases.</p>
+      </article>
+
+      <article>
+        <h3>Why Growth Rate Matters</h3>
+        <p>Algorithms with slower growth rates usually perform better on large inputs.</p>
+      </article>
+
+      <article aria-live="polite">
+        <h3 id="selected-complexity-name">Selected Complexity</h3>
+        <p id="selected-complexity-description">Choose a complexity to see how it behaves.</p>
+      </article>
+    </section>
+
+    <section id="sorting-visualizer" aria-labelledby="sorting-visualizer-heading">
+      <h2 id="sorting-visualizer-heading">Sorting Visualizer</h2>
+      <p>Watch sorting algorithms arrange data and compare their complexity.</p>
+
+      <form aria-label="Sorting visualizer controls">
+        <label for="sorting-algorithm">Sorting Algorithm</label>
+        <select id="sorting-algorithm" name="sorting-algorithm">
+          <option value="bubble-sort">Bubble Sort</option>
+          <option value="merge-sort">Merge Sort</option>
+        </select>
+
+        <button type="button" id="generate-array">Generate Array</button>
+        <button type="button" id="start-sorting">Start Sorting</button>
+      </form>
+
+      <dl id="sorting-stats" aria-label="Sorting statistics" aria-live="polite">
+        <div>
+          <dt>Comparisons</dt>
+          <dd id="comparison-count">0</dd>
+        </div>
+        <div>
+          <dt id="secondary-operation-label">Swaps</dt>
+          <dd id="swap-count">0</dd>
+        </div>
+      </dl>
+
+      <p id="sorting-status" aria-live="polite">Generate an array, then choose a sorting algorithm to visualize.</p>
+
+      <div id="sorting-display" role="img" aria-label="Sorting visualization area"></div>
+
+      <article id="bubble-sort-info" aria-labelledby="bubble-sort-complexity-heading">
+        <h3 id="bubble-sort-complexity-heading">Bubble Sort Complexity</h3>
+        <p>Bubble Sort repeatedly compares adjacent values and swaps them when they are out of order.</p>
+        <ul>
+          <li>Best case: O(n)</li>
+          <li>Average case: O(n^2)</li>
+          <li>Worst case: O(n^2)</li>
+          <li>Space complexity: O(1)</li>
+        </ul>
+      </article>
+
+      <article id="merge-sort-info" aria-labelledby="merge-sort-complexity-heading" hidden>
+        <h3 id="merge-sort-complexity-heading">Merge Sort Complexity</h3>
+        <p>Merge Sort divides the array into smaller parts, sorts each part, and merges them back together.</p>
+        <ul>
+          <li>Best case: O(n log n)</li>
+          <li>Average case: O(n log n)</li>
+          <li>Worst case: O(n log n)</li>
+          <li>Space complexity: O(n)</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="cheat-sheet" aria-labelledby="cheat-sheet-heading">
+      <h2 id="cheat-sheet-heading">Cheat Sheet</h2>
+      <label for="cheat-sheet-search">Search Cheat Sheet</label>
+      <input type="search" id="cheat-sheet-search" name="cheat-sheet-search" placeholder="Search by complexity, name, or example">
+      <div class="table-wrapper">
+        <table>
+          <caption>Common Big O complexities and examples</caption>
+          <thead>
+            <tr>
+              <th scope="col">Complexity</th>
+              <th scope="col">Name</th>
+              <th scope="col">Example</th>
+            </tr>
+          </thead>
+          <tbody id="cheat-sheet-body">
+            <tr>
+              <td>O(1)</td>
+              <td>Constant</td>
+              <td>Accessing an array item by index</td>
+            </tr>
+            <tr>
+              <td>O(log n)</td>
+              <td>Logarithmic</td>
+              <td>Binary search</td>
+            </tr>
+            <tr>
+              <td>O(n)</td>
+              <td>Linear</td>
+              <td>Looping through an array</td>
+            </tr>
+            <tr>
+              <td>O(n log n)</td>
+              <td>Linearithmic</td>
+              <td>Merge sort</td>
+            </tr>
+            <tr>
+              <td>O(n^2)</td>
+              <td>Quadratic</td>
+              <td>Nested loops over one array</td>
+            </tr>
+            <tr>
+              <td>O(2^n)</td>
+              <td>Exponential</td>
+              <td>Recursive Fibonacci without memoization</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p id="cheat-sheet-empty" hidden>No matching complexities found.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Big O Complexity Visualizer</p>
+    <nav aria-label="Footer navigation">
+      <ul>
+        <li><a href="#hero">Top</a></li>
+        <li><a href="#complexity-visualizer">Visualizer</a></li>
+        <li><a href="#cheat-sheet">Cheat Sheet</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
